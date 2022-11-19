@@ -56,8 +56,26 @@ public class EventController {
     //DELETE
     @CrossOrigin
     @DeleteMapping("/events/{eventID}")
-    public ResponseEntity<Integer> deleteEvent(@PathVariable UUID eventID) {
-        int rowsAffected = eventService.deleteEvent(eventID);
+    public ResponseEntity<int[]> deleteEvent(@PathVariable UUID eventID) {
+        int[] results = eventService.deleteEvent(eventID);
+        if(results[0] == 1 && results[1] == 1) {
+            return new ResponseEntity<>(results, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(results,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    //event_has_day RELATIONSHIP
+    //CREATE
+
+    //READ
+
+    //DELETE
+    @CrossOrigin
+    @DeleteMapping("/events/{eventID}/days/{dayID}")
+    public ResponseEntity<Integer> deleteEventHasDay(@PathVariable UUID eventID, @PathVariable UUID dayID) {
+        int rowsAffected = eventService.deleteEventHasDay(eventID, dayID);
         if(rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
         } else {

@@ -97,14 +97,16 @@ public class EventService {
     }
 
     //DELETE
-    public int deleteEvent(UUID eventID) {
-        String stmt = "DELETE FROM event WHERE event_id='%s'".formatted(eventID);
+    public int[] deleteEvent(UUID eventID) {
+        String stmt1 = "DELETE ALL FROM event_has_day WHERE event_id='%s'".formatted(eventID);
+        String stmt2 = "DELETE FROM event WHERE event_id='%s'".formatted(eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            return statement.executeUpdate(stmt);
+            int[] results = {statement.executeUpdate(stmt1), statement.executeUpdate(stmt2)};
+            return results;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -114,7 +116,7 @@ public class EventService {
                 e.printStackTrace();
             }
         }
-        return -1;
+        return new int[2];
     }
 
     //event_has_day RELATIONSHIP
