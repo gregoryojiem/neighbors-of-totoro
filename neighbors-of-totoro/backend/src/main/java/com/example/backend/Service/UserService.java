@@ -1,14 +1,16 @@
 package com.example.backend.Service;
 
+import com.example.backend.Model.DateRange;
+import com.example.backend.Model.Event;
 import com.example.backend.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -105,6 +107,110 @@ public class UserService {
                     ResultSet.CONCUR_UPDATABLE);
             return statement.executeUpdate(stmt);
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //UserParticipatesEvent RELATIONSHIP
+    //CREATE
+    public int createUserParticipatesEvent(UUID userID, UUID eventID) {
+        String st = ("INSERT INTO user_participates_event (user_id, event_id) VALUES ('%s', '%s')")
+                .formatted(userID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //GET
+    public Event getUserEvent(UUID userID, UUID eventID) {
+        String stmt = ("SELECT * FROM event " +
+                "INNER JOIN user_participates_event upe on event.event_id = upe.event_id " +
+                "WHERE user_id='%s' AND upe.event_id='%s'").formatted(userID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(stmt);
+            Event event = new Event();
+            while(rs.next()) {
+                event.setEventID(rs.getObject("event_id", UUID.class));
+                event.setTitle(rs.getString("title"));
+            }
+            return event;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public List<Event> getUserEvents(UUID userID) {
+        String stmt = ("SELECT * FROM event " +
+                "INNER JOIN user_participates_event upe on event.event_id = upe.event_id " +
+                "WHERE user_id='%s'").formatted(userID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(stmt);
+            List<Event> events = new ArrayList<>();
+            while(rs.next()) {
+                Event event = new Event();
+                event.setEventID(rs.getObject("event_id", UUID.class));
+                event.setTitle(rs.getString("title"));
+                events.add(event);
+            }
+            return events;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    //DELETE
+    public int deleteUserParticipatesEvent(UUID userID, UUID eventID) {
+        String st = ("DELETE FROM user_participates_event (user_id, event_id) WHERE (user_id='%s' AND eventID='%s')")
+                .formatted(userID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
