@@ -21,7 +21,8 @@ public class DayService {
     //CREATE
     public Object[] createDay(Day day) {
         String stmt = ("insert into day (start_time, end_time, date, timezone) " +
-                "values('%tc', '%tc', '%tF', '%s')").formatted();
+                "values('%tc', '%tc', '%tF', '%s')").formatted(day.getStartTime(), day.getEndTime(),
+                day.getDate(), day.getTimezone());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
