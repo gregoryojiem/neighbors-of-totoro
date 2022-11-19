@@ -3,7 +3,6 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea
-neighbors-of-totoro.iml
 
 ### Eclipse ###
 .apt_generated
@@ -29,3 +28,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+neighbors-of-totoro.iml
+neighbors-of-totoro/backend/backend.iml
+neighbors-of-totoro/backend/src/main/java/com/example/backend/Config/dbInfo.ini
+neighbors-of-totoro/backend/target/
