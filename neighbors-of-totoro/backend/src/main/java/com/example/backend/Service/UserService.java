@@ -1,6 +1,5 @@
 package com.example.backend.Service;
 
-import com.example.backend.Model.DateRange;
 import com.example.backend.Model.Event;
 import com.example.backend.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;

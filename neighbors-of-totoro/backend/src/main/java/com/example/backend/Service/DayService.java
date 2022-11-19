@@ -77,35 +77,6 @@ public class DayService {
         return null;
     }
 
-    public Day getDayByEvent(UUID eventID){
-        String query = ("").formatted(eventID);
-        Connection conn = DataSourceUtils.getConnection(dataSource);
-        try {
-            Statement statement = conn.createStatement(
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-            ResultSet rs = statement.executeQuery(query);
-            Day day = new Day();
-            while(rs.next()){
-                day.setDayID(rs.getObject("day_id", UUID.class));
-                day.setStartTime(rs.getTimestamp("start_time"));
-                day.setEndTime(rs.getTimestamp("end_time"));
-                day.setDate(rs.getDate("date"));
-                day.setTimezone(rs.getString("timezone"));
-            }
-            return day;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
-
     public List<Day> getDays(){
         String query = "select * from day";
         Connection conn = DataSourceUtils.getConnection(dataSource);
