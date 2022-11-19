@@ -93,6 +93,17 @@ public class EventController {
     }
 
     @CrossOrigin
+    @PostMapping(value = "/events/{eventID}/days/{dayID}")
+    public ResponseEntity<TimeRange> getTimeRangeByDayInEvent(@PathVariable UUID eventID, @PathVariable UUID dayID) {
+        TimeRange range = eventService.getTimeRangeByDayInEvent(eventID, dayID);
+        if (range != null) {
+            return new ResponseEntity<>(range, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin
     @PostMapping(value = "/events/{eventID}/days")
     public ResponseEntity<List<Day>> getAllDaysInEvent(@PathVariable UUID eventID) {
         List<Day> days = eventService.getAllDaysInEvent(eventID);
