@@ -19,7 +19,7 @@ public class DayService {
     DataSource dataSource;
 
     //CREATE
-    public int[] createDay(Day day) {
+    public Object[] createDay(Day day) {
         String stmt = ("insert into day (start_time, end_time, date, timezone) " +
                 "values('%tc', '%tc', '%tF', '%s')").formatted();
         Connection conn = DataSourceUtils.getConnection(dataSource);
@@ -30,8 +30,8 @@ public class DayService {
             int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
             ResultSet keys = statement.getGeneratedKeys();
             keys.next();
-            int key = keys.getInt(5);
-            return new int[]{rowsAffected, key};
+            UUID key = keys.getObject(5, UUID.class);
+            return new Object[]{rowsAffected, key};
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -41,7 +41,7 @@ public class DayService {
                 e.printStackTrace();
             }
         }
-        return new int[2];
+        return new Object[2];
     }
 
     //READ

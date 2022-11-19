@@ -21,16 +21,14 @@ public class DayController {
     //CREATE
     @CrossOrigin
     @PostMapping(value = "/days", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> createDay(@RequestBody Day newDay) {
-        int[] results = dayService.createDay(newDay);
-        if (results[0] == 1 && results[1] != 0) {
+    public ResponseEntity<Object> createDay(@RequestBody Day newDay) {
+        Object[] results = dayService.createDay(newDay);
+        if (results[0] == (Integer) 1 && results[1] != null) {
             return new ResponseEntity<>(results[1], HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(results[1], HttpStatus.BAD_REQUEST);
         }
     }
-
-
 
     //READ
     @CrossOrigin
