@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 .idea
 neighbors-of-totoro.iml
+neighbors-of-totoro/backend/backend.iml
 
 ### Eclipse ###
 .apt_generated
