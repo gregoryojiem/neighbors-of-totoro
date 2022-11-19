@@ -1,5 +1,6 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Model.Event;
 import com.example.backend.Model.User;
 import com.example.backend.Service.UserService;
 import com.google.common.hash.Hashing;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -73,6 +75,42 @@ public class UserController {
     @DeleteMapping("/users/{userID}")
     public ResponseEntity<Integer> deleteUser(@PathVariable UUID userID) {
         int rowsAffected = userService.deleteUser(userID);
+        if(rowsAffected == 1) {
+            return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/users/{userID}/events/{eventID}")
+    public ResponseEntity<Event> getUserEvent(@PathVariable UUID userID, @PathVariable UUID eventID) {
+        Event event = userService.getUserEvent(userID, eventID);
+        return new ResponseEntity<>(event, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping("/users/{userID}/events")
+    public ResponseEntity<List<Event>> getUserEvents(@PathVariable UUID userID) {
+        List<Event> events = userService.getUserEvents(userID);
+        return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/users/{userID}/events/{eventID}")
+    public ResponseEntity<Integer> createUserParticipatesEvent(@PathVariable UUID userID, @PathVariable UUID eventID) {
+        int rowsAffected = userService.createUserParticipatesEvent(userID, eventID);
+        if(rowsAffected == 1) {
+            return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/users/{userID}/events/{eventID}")
+    public ResponseEntity<Integer> deleteUserParticipatesEvent(@PathVariable UUID userID, @PathVariable UUID eventID) {
+        int rowsAffected = userService.deleteUserParticipatesEvent(userID, eventID);
         if(rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
         } else {
