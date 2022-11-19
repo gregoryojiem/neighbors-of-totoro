@@ -1,6 +1,8 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
+import com.example.backend.Service.DayService;
 import com.example.backend.Service.EventService;
 import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -68,8 +71,40 @@ public class EventController {
 
     //event_has_day RELATIONSHIP
     //CREATE
+    @CrossOrigin
+    @PostMapping(value = "/events/{eventID}/days/{dayID}")
+    public ResponseEntity<Object[]> createEventHasDay(@RequestBody UUID eventID, @PathVariable UUID dayID) {
+        Object[] results = eventService.createEventHasDay(eventID, dayID);
+        if ((int) results[0] == 1) {
+            return new ResponseEntity<>(results, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(results, HttpStatus.BAD_REQUEST);
+        }
+    }
 
     //READ
+    @CrossOrigin
+    @PostMapping(value = "/events/{eventID}/days/{dayID}")
+    public ResponseEntity<Day> getDayInEvent(@RequestBody UUID eventID, @PathVariable UUID dayID) {
+        Day day = eventService.getDayInEvent(eventID, dayID);
+        if (day != null) {
+            return new ResponseEntity<>(day, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/events/{eventID}/days")
+    public ResponseEntity<List<Day>> getAllDaysInEvent(@RequestBody UUID eventID) {
+        List<Day> days = eventService.getAllDaysInEvent(eventID);
+        if (days != null) {
+            return new ResponseEntity<>(days, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     //DELETE
     @CrossOrigin
@@ -79,7 +114,7 @@ public class EventController {
         if(rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(rowsAffected, HttpStatus.BAD_REQUEST);
         }
     }
 }
