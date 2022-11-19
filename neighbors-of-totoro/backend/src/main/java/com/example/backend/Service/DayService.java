@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
@@ -20,6 +21,7 @@ public class DayService {
 
     //CREATE
     public Object[] createDay(Day day) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         String stmt = ("insert into day (start_time, end_time, date, timezone) " +
                 "values('%tc', '%tc', '%tF', '%s')").formatted(day.getStartTime(), day.getEndTime(),
                 day.getDate(), day.getTimezone());
