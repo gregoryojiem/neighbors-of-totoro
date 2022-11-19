@@ -1,5 +1,6 @@
 package com.example.backend.Service;
 
+import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverAction;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -121,9 +121,9 @@ public class EventService {
 
     //event_has_day RELATIONSHIP
     //CREATE
-    public Object[] createEventHasDay(UUID eventID, UUID dayID){
-        String stmt = ("INSERT INTO event_has_day (event_id, day_id) VALUES('%s', '%s')")
-                .formatted(eventID, dayID);
+    public Object[] createEventHasDay(UUID eventID, UUID dayID, TimeRange range){
+        String stmt = ("INSERT INTO event_has_day (event_id, day_id, start_time, end_time)" +
+                " VALUES('%s', '%s', '%tc', '%tc')").formatted(eventID, dayID, range.getStartTime(), range.getEndTime());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -167,6 +167,33 @@ public class EventService {
                 day.setTimezone(rs.getString("timezone"));
             }
             return day;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public TimeRange getTimeRangeByDayInEvent(UUID eventID, UUID dayID) {
+        String query = ("select start_time, end_time from event_has_day ehd " +
+                "where ehd.event_id='%s' and ehd.day_id='%s'").formatted(eventID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(query);
+            TimeRange range = new TimeRange();
+            while(rs.next()) {
+                range.setStartTime(rs.getTimestamp("start_time"));
+                range.setEndTime(rs.getTimestamp("end_time"));
+            }
+            return range;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

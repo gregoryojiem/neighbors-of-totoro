@@ -1,5 +1,6 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
 
@@ -65,13 +66,13 @@ public class EventController {
         }
     }
 
-
     //event_has_day RELATIONSHIP
     //CREATE
     @CrossOrigin
-    @PostMapping(value = "/events/{eventID}/days/{dayID}")
-    public ResponseEntity<Object[]> createEventHasDay(@PathVariable UUID eventID, @PathVariable UUID dayID) {
-        Object[] results = eventService.createEventHasDay(eventID, dayID);
+    @PostMapping(value = "/events/{eventID}/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object[]> createEventHasDay(@PathVariable UUID eventID, @PathVariable UUID dayID,
+                                                      @RequestBody TimeRange range) {
+        Object[] results = eventService.createEventHasDay(eventID, dayID, range);
         if ((int) results[0] == 1) {
             return new ResponseEntity<>(results, HttpStatus.CREATED);
         } else {

@@ -2,11 +2,11 @@ package com.example.backend.Model;
 
 import java.sql.Timestamp;
 
-public class DateRange {
+public class TimeRange {
     private Timestamp startTime;
     private Timestamp endTime;
 
-    public DateRange() {
+    public TimeRange() {
     }
 
     public Timestamp getStartTime() {
