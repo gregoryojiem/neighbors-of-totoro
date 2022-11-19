@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
@@ -122,6 +123,7 @@ public class EventService {
     //event_has_day RELATIONSHIP
     //CREATE
     public Object[] createEventHasDay(UUID eventID, UUID dayID, TimeRange range){
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         String stmt = ("INSERT INTO event_has_day (event_id, day_id, start_time, end_time)" +
                 " VALUES('%s', '%s', '%tc', '%tc')").formatted(eventID, dayID, range.getStartTime(), range.getEndTime());
         Connection conn = DataSourceUtils.getConnection(dataSource);
@@ -132,7 +134,7 @@ public class EventService {
             int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
             ResultSet keys = statement.getGeneratedKeys();
             keys.next();
-            UUID eventKey = keys.getObject(2, UUID.class);
+            UUID eventKey = keys.getObject(3, UUID.class);
             UUID dayKey = keys.getObject(4, UUID.class);
             Object[] results = {rowsAffected, eventKey, dayKey};
             return results;

@@ -82,7 +82,7 @@ public class EventController {
 
     //READ
     @CrossOrigin
-    @PostMapping(value = "/events/{eventID}/days/{dayID}")
+    @GetMapping(value = "/events/{eventID}/days/{dayID}")
     public ResponseEntity<Day> getDayInEvent(@PathVariable UUID eventID, @PathVariable UUID dayID) {
         Day day = eventService.getDayInEvent(eventID, dayID);
         if (day != null) {
@@ -93,7 +93,7 @@ public class EventController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/events/{eventID}/days/{dayID}")
+    @GetMapping(value = "/events/{eventID}/days/{dayID}/time")
     public ResponseEntity<TimeRange> getTimeRangeByDayInEvent(@PathVariable UUID eventID, @PathVariable UUID dayID) {
         TimeRange range = eventService.getTimeRangeByDayInEvent(eventID, dayID);
         if (range != null) {
@@ -104,7 +104,7 @@ public class EventController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/events/{eventID}/days")
+    @GetMapping(value = "/events/{eventID}/days")
     public ResponseEntity<List<Day>> getAllDaysInEvent(@PathVariable UUID eventID) {
         List<Day> days = eventService.getAllDaysInEvent(eventID);
         if (days != null) {
