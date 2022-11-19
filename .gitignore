@@ -33,4 +33,3 @@ neighbors-of-totoro.iml
 neighbors-of-totoro/backend/backend.iml
 neighbors-of-totoro/backend/src/main/java/com/example/backend/Config/dbInfo.ini
 neighbors-of-totoro/backend/target/
-frontend.iml
