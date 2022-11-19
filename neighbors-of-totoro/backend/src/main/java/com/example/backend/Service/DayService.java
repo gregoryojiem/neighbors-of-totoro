@@ -59,7 +59,7 @@ public class DayService {
                 day.setStartTime(rs.getTimestamp("start_time"));
                 day.setEndTime(rs.getTimestamp("end_time"));
                 day.setDate(rs.getDate("date"));
-                day.setTimeZone(rs.getString("timezone"));
+                day.setTimezone(rs.getString("timezone"));
             }
             return day;
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class DayService {
                 day.setStartTime(rs.getTimestamp("start_time"));
                 day.setEndTime(rs.getTimestamp("end_time"));
                 day.setDate(rs.getDate("date"));
-                day.setTimeZone(rs.getString("timezone"));
+                day.setTimezone(rs.getString("timezone"));
             }
             return day;
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class DayService {
                 day.setStartTime(rs.getTimestamp("start_time"));
                 day.setEndTime(rs.getTimestamp("end_time"));
                 day.setDate(rs.getDate("date"));
-                day.setTimeZone(rs.getString("timezone"));
+                day.setTimezone(rs.getString("timezone"));
                 days.add(day);
             }
             return days;
@@ -140,7 +140,7 @@ public class DayService {
     public int updateDay(UUID dayID, Day day) {
         String stmt = ("update day set start_time='%tc', end_time='%tc', " +
                 "date='%tF', timezone='%s' where day_id='%s'").formatted(day.getStartTime(),
-                day.getEndTime(), day.getDate(), day.getTimeZone(), dayID);
+                day.getEndTime(), day.getDate(), day.getTimezone(), dayID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(

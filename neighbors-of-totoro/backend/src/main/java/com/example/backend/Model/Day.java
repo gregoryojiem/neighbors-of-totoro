@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Day {
 
     private UUID dayID;
-    private String timeZone;
+    private String timezone;
     private Date date;
     private Timestamp startTime;
     private Timestamp endTime;
@@ -23,12 +23,12 @@ public class Day {
         this.dayID = dayID;
     }
 
-    public String getTimeZone() {
-        return timeZone;
+    public String getTimezone() {
+        return timezone;
     }
 
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
     public Date getDate() {
