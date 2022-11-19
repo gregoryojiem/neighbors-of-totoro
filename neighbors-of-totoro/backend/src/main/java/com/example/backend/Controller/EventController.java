@@ -2,18 +2,16 @@ package com.example.backend.Controller;
 
 import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
-import com.example.backend.Service.DayService;
+
 import com.example.backend.Service.EventService;
-import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
+
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @RestController
@@ -73,7 +71,7 @@ public class EventController {
     //CREATE
     @CrossOrigin
     @PostMapping(value = "/events/{eventID}/days/{dayID}")
-    public ResponseEntity<Object[]> createEventHasDay(@RequestBody UUID eventID, @PathVariable UUID dayID) {
+    public ResponseEntity<Object[]> createEventHasDay(@PathVariable UUID eventID, @PathVariable UUID dayID) {
         Object[] results = eventService.createEventHasDay(eventID, dayID);
         if ((int) results[0] == 1) {
             return new ResponseEntity<>(results, HttpStatus.CREATED);
@@ -85,7 +83,7 @@ public class EventController {
     //READ
     @CrossOrigin
     @PostMapping(value = "/events/{eventID}/days/{dayID}")
-    public ResponseEntity<Day> getDayInEvent(@RequestBody UUID eventID, @PathVariable UUID dayID) {
+    public ResponseEntity<Day> getDayInEvent(@PathVariable UUID eventID, @PathVariable UUID dayID) {
         Day day = eventService.getDayInEvent(eventID, dayID);
         if (day != null) {
             return new ResponseEntity<>(day, HttpStatus.OK);
@@ -96,7 +94,7 @@ public class EventController {
 
     @CrossOrigin
     @PostMapping(value = "/events/{eventID}/days")
-    public ResponseEntity<List<Day>> getAllDaysInEvent(@RequestBody UUID eventID) {
+    public ResponseEntity<List<Day>> getAllDaysInEvent(@PathVariable UUID eventID) {
         List<Day> days = eventService.getAllDaysInEvent(eventID);
         if (days != null) {
             return new ResponseEntity<>(days, HttpStatus.OK);
@@ -104,7 +102,6 @@ public class EventController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 
     //DELETE
     @CrossOrigin
