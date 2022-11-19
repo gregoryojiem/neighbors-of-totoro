@@ -59,7 +59,7 @@ public class DayController {
 
     //DELETE
     @CrossOrigin
-    @DeleteMapping("/albums/{dayID}")
+    @DeleteMapping("/days/{dayID}")
     public ResponseEntity<Integer> deleteAlbum(@PathVariable UUID dayID) {
         int rowsAffected = dayService.deleteDay(dayID);
         if (rowsAffected == 1) {

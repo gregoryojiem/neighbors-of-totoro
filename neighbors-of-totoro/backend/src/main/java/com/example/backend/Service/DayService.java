@@ -164,7 +164,7 @@ public class DayService {
 
     //DELETE
     public int deleteDay(UUID dayID) {
-        String stmt = ("delete from day where day_id='%s'").formatted(dayID);
+        String stmt = ("delete from day where day_id='%s'").formatted(dayID.toString());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
