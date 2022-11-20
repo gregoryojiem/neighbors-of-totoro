@@ -11,7 +11,6 @@ background: #000000;
 
 .navText1{
     position: absolute;
-    width: 120px;
     height: 51px;
     left: 829px;
     top: 7px;
@@ -27,7 +26,6 @@ background: #000000;
 
 .navText2{
     position: absolute;
-    width: 120px;
     height: 51px;
     left: 959px;
     top: 7px;
@@ -43,7 +41,6 @@ background: #000000;
 
 .navText3{
     position: absolute;
-    width: 120px;
     height: 51px;
     left: 1079px;
     top: 7px;
@@ -59,7 +56,6 @@ background: #000000;
 
 .navText4{
     position: absolute;
-    width: 120px;
     height: 51px;
     left: 1200px;
     top: 7px;
@@ -105,7 +101,7 @@ top: 64px;
 position: absolute;
 width: 583px;
 height: 45px;
-left: 43%;
+left: 45%;
 top: 40%;
 
 font-weight: 800;
@@ -124,7 +120,7 @@ color: #FFFFFF;
     position: absolute;
     width: 489px;
     height: 34px;
-    left: 49%;
+    left: 44.5%;
     top: 48%;
     
     font-family: 'Fahkwang';
