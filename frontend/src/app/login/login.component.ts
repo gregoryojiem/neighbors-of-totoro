@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  open(content: TemplateRef<any>) {
+  open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then()
   }
 }
