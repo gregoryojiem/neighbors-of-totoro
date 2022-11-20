@@ -13,6 +13,7 @@ import { AvatarComponent } from './avatar/avatar.component';
 import { ModalViewComponent } from './modal-view/modal-view.component';
 import { UserService } from "./user.service";
 import { LandingComponent } from './landing/landing.component';
+import { AvailabilityComponent } from './availability/availability.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LandingComponent } from './landing/landing.component';
     LoginComponent,
     AvatarComponent,
     ModalViewComponent,
-    LandingComponent
+    LandingComponent,
+    AvailabilityComponent
   ],
   imports: [
     BrowserModule,
