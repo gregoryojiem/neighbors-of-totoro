@@ -1,5 +1,6 @@
 package com.example.backend.Service;
 
+import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
 import com.example.backend.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,6 +211,90 @@ public class UserService {
                     ResultSet.CONCUR_UPDATABLE);
             return stmt.executeUpdate(st);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //user invites user RELATIONSHIP
+    //CREATE
+    public Object[] createInvitation(UUID inviterID, UUID inviteeID, UUID eventID) {
+        String stmt = ("insert into user_invites_user (inviter_id, invitee_id, event_id) " +
+                "values('%s', '%s', '%s')").formatted(inviterID, inviteeID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
+            ResultSet keys = statement.getGeneratedKeys();
+            keys.next();
+            UUID inviterKey = keys.getObject(1, UUID.class);
+            UUID inviteeKey = keys.getObject(2, UUID.class);
+            UUID eventKey = keys.getObject(3, UUID.class);
+            Object[] results = {rowsAffected, inviterKey, inviteeKey, eventKey};
+            return results;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return new Object[4];
+    }
+
+    //READ
+    public List<Event> getAllEventByInvitationsReceived(UUID inviteeID){
+        String query = ("select * from event " +
+                "inner join user_invites_user uiu on uiu.event_id = event.event_id " +
+                "where uiu.invitee_id='%s'").formatted(inviteeID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(query);
+            List<Event> events = new ArrayList<>();
+            while(rs.next()) {
+                Event event = new Event();
+                event.setEventID(rs.getObject("event_id", UUID.class));
+                event.setTitle(rs.getString("title"));
+                events.add(event);
+            }
+            return events;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    //DELETE
+    public int deleteInvitation(UUID inviterID, UUID inviteeID, UUID eventID) {
+        String stmt = ("delete from user_invites_user " +
+                "where inviter_id='%s' and invitee_id='%s' and event_id='%s'")
+                .formatted(inviterID, inviteeID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return statement.executeUpdate(stmt);
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {

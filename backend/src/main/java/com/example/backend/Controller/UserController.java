@@ -1,6 +1,8 @@
 package com.example.backend.Controller;
 
+import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
+import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.User;
 import com.example.backend.Service.UserService;
 import com.google.common.hash.Hashing;
@@ -111,6 +113,45 @@ public class UserController {
     @DeleteMapping(value = "/users/{userID}/events/{eventID}")
     public ResponseEntity<Integer> deleteUserParticipatesEvent(@PathVariable UUID userID, @PathVariable UUID eventID) {
         int rowsAffected = userService.deleteUserParticipatesEvent(userID, eventID);
+        if(rowsAffected == 1) {
+            return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //user invites user RELATIONSHIP
+    //CREATE
+    @CrossOrigin
+    @PostMapping(value = "/events/{eventID}/invites/{inviterID}/-/{inviteeID}")
+    public ResponseEntity<Object[]> createInvitation(@PathVariable UUID inviterID, @PathVariable UUID inviteeID,
+                                                     @PathVariable UUID eventID) {
+        Object[] results = userService.createInvitation(inviterID, inviteeID, eventID);
+        if ((int) results[0] == 1) {
+            return new ResponseEntity<>(results, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(results, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //READ
+    @CrossOrigin
+    @GetMapping(value = "/events/{inviteeID}/invites")
+    public ResponseEntity<List<Event>> getAllEventByInvitationsReceived(@PathVariable UUID inviteeID) {
+        List<Event> events = userService.getAllEventByInvitationsReceived(inviteeID);
+        if (events != null) {
+            return new ResponseEntity<>(events, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //DELETE
+    @CrossOrigin
+    @DeleteMapping(value = "/events/{eventID}/invites/{inviterID}/-/{inviteeID}")
+    public ResponseEntity<Integer> deleteInvitation(@PathVariable UUID inviterID, @PathVariable UUID inviteeID,
+                                                    @PathVariable UUID eventID) {
+        int rowsAffected = userService.deleteInvitation(inviterID, inviteeID, eventID);
         if(rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
         } else {
