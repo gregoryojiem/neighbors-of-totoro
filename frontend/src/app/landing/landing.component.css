@@ -1,0 +1,191 @@
+
+nav{
+position: absolute;
+width: 100%;
+height: 64px;
+left: 0px;
+top: 0px;
+
+background: #000000;
+}
+
+.navText1{
+    position: absolute;
+    width: 120px;
+    height: 51px;
+    left: 829px;
+    top: 7px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navText2{
+    position: absolute;
+    width: 120px;
+    height: 51px;
+    left: 959px;
+    top: 7px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navText3{
+    position: absolute;
+    width: 120px;
+    height: 51px;
+    left: 1079px;
+    top: 7px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.navText4{
+    position: absolute;
+    width: 120px;
+    height: 51px;
+    left: 1200px;
+    top: 7px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.vineWall{
+position: absolute;
+width: 100%;
+height: 70%;
+left: 0px;
+top: 64px;
+}
+
+.overlay{
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    left: 0px;
+    top: 64px;
+    
+    background: rgba(0, 0, 0, 0.59);
+}
+
+.bottomBar{
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    left: 0px;
+    top: 80%;
+
+    border: 10px solid #4F6F58;
+
+}
+.titleText{
+position: absolute;
+width: 583px;
+height: 45px;
+left: 43%;
+top: 40%;
+
+font-weight: 800;
+font-size: 60px;
+line-height: 58px;
+display: flex;
+align-items: center;
+text-align: center;
+
+font-family: serif;
+color: #FFFFFF;
+
+}
+
+.tagLine{
+    position: absolute;
+    width: 489px;
+    height: 34px;
+    left: 49%;
+    top: 48%;
+    
+    font-family: 'Fahkwang';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+    
+}
+
+.introText{
+position: absolute;
+width: 345px;
+height: 238px;
+left: 20%;
+top: 500px;
+
+font-family: 'serif';
+font-style: normal;
+font-weight: 600;
+font-size: 48px;
+line-height: 58px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
+
+.captionText{
+position: absolute;
+width: 252px;
+height: 183px;
+left: 55%;
+top: 520px;
+
+font-family: sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
+.introLine{
+position: absolute;
+width: 188px;
+height: 0px;
+left: 43%;
+top: 625px;
+
+border: 1px solid #000000;
+transform: rotate(90deg);
+}
