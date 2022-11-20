@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
@@ -225,6 +226,7 @@ public class UserService {
     //UserAvailabilityDay RELATIONSHIP
     //CREATE
     public int createUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         String st = ("INSERT INTO user_availability_day (start_time, end_time, user_id, day_id) VALUES " +
                 "('%tc', '%tc', '%s', '%s')")
                 .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
@@ -279,8 +281,8 @@ public class UserService {
 
     //DELETE
     public int deleteUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
-        String st = ("DELETE FROM user_availability_day (start_time, end_time, user_id, day_id) WHERE " +
-                "(start_time='%tc' AND end_time='%tc' AND user_id='%s' AND day_id='%s')")
+        String st = ("DELETE FROM user_availability_day WHERE " +
+                "start_time='%tc' AND end_time='%tc' AND user_id='%s' AND day_id='%s'")
                 .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {

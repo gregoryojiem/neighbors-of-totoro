@@ -122,7 +122,7 @@ public class UserController {
     //UserAvailabilityDay RELATIONSHIP
     //CREATE
     @CrossOrigin
-    @PostMapping(value = "/users/{userID}/day/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/users/{userID}/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Integer> createUserAvailabilityDay(@RequestBody TimeRange timeRange,
                                                              @PathVariable UUID userID, @PathVariable UUID dayID) {
         int rowsAffected = userService.createUserAvailabilityDay(timeRange, userID, dayID);
@@ -147,7 +147,7 @@ public class UserController {
 
     //DELETE
     @CrossOrigin
-    @DeleteMapping(value = "/users/{userID}/day/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/users/{userID}/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Integer> deleteUserAvailabilityDay(@RequestBody TimeRange timeRange,
                                                              @PathVariable UUID userID, @PathVariable UUID dayID) {
         int rowsAffected = userService.deleteUserAvailabilityDay(timeRange, userID, dayID);
