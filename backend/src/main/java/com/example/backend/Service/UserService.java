@@ -205,7 +205,7 @@ public class UserService {
 
     //DELETE
     public int deleteUserParticipatesEvent(UUID userID, UUID eventID) {
-        String st = ("DELETE FROM user_participates_event (user_id, event_id) WHERE (user_id='%s' AND eventID='%s')")
+        String st = ("DELETE FROM user_participates_event WHERE (user_id='%s' AND event_id='%s')")
                 .formatted(userID, eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
@@ -271,6 +271,7 @@ public class UserService {
                 Event event = new Event();
                 event.setEventID(rs.getObject("event_id", UUID.class));
                 event.setTitle(rs.getString("title"));
+                event.setDescription(rs.getString("description"));
                 events.add(event);
             }
             return events;
