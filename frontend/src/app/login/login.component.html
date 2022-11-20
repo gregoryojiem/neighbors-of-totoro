@@ -1,6 +1,7 @@
-<ng-template #content let-modal class="modal">
-  <div>
-    <button> Back </button>
+<div class="modal-view">
+  <div class="modal-content">
+    <button class="back-btn"> Back </button>
+
     <ul ngbNav #nav="ngbNav" class="nav-tabs">
       <li ngbNavItem>
         <a ngbNavLink>Login</a>
@@ -15,11 +16,12 @@
             </form>
           </div>
 
-          <button type="submit" >
+          <button class="submit-button" type="submit" >
             Login
           </button>
         </ng-template>
       </li>
+
       <li ngbNavItem>
         <a ngbNavLink>Create Account</a>
         <ng-template ngbNavContent>
@@ -32,15 +34,14 @@
               <input type="text" placeholder="Enter Password">
             </form>
 
-            <button type="submit" >
+            <button class="submit-button" type="submit" >
               Create Account
             </button>
           </div>
         </ng-template>
       </li>
     </ul>
+
     <div [ngbNavOutlet]="nav"></div>
   </div>
-</ng-template>
-
-<a class="btn btn-lg btn-outline-primary" (click)="open(content)">Account</a>
+</div>

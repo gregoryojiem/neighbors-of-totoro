@@ -5,18 +5,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DayService } from "./day.service";
+import { Event } from "./Event";
+import { TimeRange } from "./TimeRange";
+import { Day } from "./Day";
+import { AvatarComponent } from './avatar/avatar.component';
+import { ModalViewComponent } from './modal-view/modal-view.component';
 import { UserService } from "./user.service";
 import { LandingComponent } from './landing/landing.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    AvatarComponent,
+    ModalViewComponent,
     LandingComponent
   ],
   imports: [
-    BrowserModule,
-    NgbModule
     BrowserModule,
     HttpClientModule,
     BrowserModule,
