@@ -73,6 +73,7 @@
   color: whitesmoke;
   text-align: center;
   display: block;
+  /*display: none;*/
   justify-content: center;
   align-items: center;
 }
