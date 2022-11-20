@@ -1,7 +1,7 @@
 export interface Day {
-  dayID: string,
-  timezone: string,
-  date: Date,
   startTime: Date,
-  endTime: Date
+  endTime: Date,
+  date: Date,
+  timezone: string,
+  dayID: string
 }
