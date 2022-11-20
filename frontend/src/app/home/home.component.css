@@ -1,0 +1,64 @@
+.accountBox{
+    position: absolute;
+    width: 25%;
+    height: 20%;
+    left: 20%;
+    top: 116px;
+    
+    background: #FFFFFF;
+    border-radius: 43px; 
+}
+
+.usernameText{
+position: absolute;
+width: 222px;
+height: 38px;
+left: 223px;
+top: 366px;
+
+
+font-weight: 400;
+font-size: 32px;
+line-height: 42px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: rgba(12, 28, 17, 0.8);
+}
+
+.navbar {
+    background-color: black;
+    height: 40%;
+    color: whitesmoke;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  
+  .navcontent {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* navbar menu */
+  .menu {
+    display: flex;
+    gap: 1em;
+    font-size: 20px;
+  }
+  .vineWall{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0px;
+    top: 55px;
+    }
+    
+    .overlay{
+        position: absolute;
+        left: 0px;
+        top: 55px;
+        
+        background: rgba(0, 0, 0, 0.59);
+    }
+    
