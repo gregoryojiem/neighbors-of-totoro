@@ -8,6 +8,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private int avatar;
 
     public User() {
     }
@@ -42,5 +43,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 }

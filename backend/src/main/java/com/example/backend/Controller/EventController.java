@@ -59,7 +59,7 @@ public class EventController {
     @DeleteMapping("/events/{eventID}")
     public ResponseEntity<int[]> deleteEvent(@PathVariable UUID eventID) {
         int[] results = eventService.deleteEvent(eventID);
-        if(results[0] == 1 && results[1] == 1) {
+        if(results[1] == 1) {
             return new ResponseEntity<>(results, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(results,HttpStatus.BAD_REQUEST);

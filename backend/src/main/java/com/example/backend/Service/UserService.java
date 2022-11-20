@@ -22,8 +22,8 @@ public class UserService {
 
     //CREATE
     public Object[] createUser(User user) {
-        String stmt = ("INSERT INTO \"user\" (email, username, password) VALUES('%s', '%s', '%s')")
-                .formatted(user.getEmail(), user.getUsername(), user.getPassword());
+        String stmt = ("INSERT INTO \"user\" (email, username, password, avatar) VALUES('%s', '%s', '%s', %d)")
+                .formatted(user.getEmail(), user.getUsername(), user.getPassword(), user.getAvatar());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -32,7 +32,7 @@ public class UserService {
             int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
             ResultSet keys = statement.getGeneratedKeys();
             keys.next();
-            UUID key = keys.getObject(4, UUID.class);
+            UUID key = keys.getObject(5, UUID.class);
             Object[] results = {rowsAffected, key};
             return results;
         } catch (Exception e)
@@ -62,6 +62,7 @@ public class UserService {
                 user.setEmail(rs.getString("email"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setAvatar(rs.getInt("avatar"));
                 user.setUserID(rs.getObject("user_id", UUID.class));
             }
             return user;
@@ -79,8 +80,8 @@ public class UserService {
 
     //UPDATE
     public int updateUser(UUID userID, User user) {
-        String stmt = ("UPDATE \"user\" SET email='%s', username='%s', password='%s' WHERE user_id='%s'")
-                .formatted(user.getEmail(), user.getUsername(), user.getPassword(), userID);
+        String stmt = ("UPDATE \"user\" SET email='%s', username='%s', password='%s', avatar=%d WHERE user_id='%s'")
+                .formatted(user.getEmail(), user.getUsername(), user.getPassword(), user.getAvatar(), userID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(

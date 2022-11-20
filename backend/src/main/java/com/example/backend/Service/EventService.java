@@ -23,8 +23,8 @@ public class EventService {
 
     //CREATE
     public Object[] createEvent(Event event) {
-        String stmt = ("INSERT INTO event (title) VALUES('%s')")
-                .formatted(event.getTitle());
+        String stmt = ("INSERT INTO event (title, description) VALUES('%s','%s')")
+                .formatted(event.getTitle(), event.getDescription());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -33,7 +33,7 @@ public class EventService {
             int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
             ResultSet keys = statement.getGeneratedKeys();
             keys.next();
-            UUID key = keys.getObject(2, UUID.class);
+            UUID key = keys.getObject(3, UUID.class);
             Object[] results = {rowsAffected, key};
             return results;
         } catch (Exception e) {
@@ -60,6 +60,7 @@ public class EventService {
             Event event = new Event();
             while(rs.next()) {
                 event.setTitle(rs.getString("title"));
+                event.setDescription(rs.getString("description"));
                 event.setEventID(rs.getObject("event_id", UUID.class));
             }
             return event;
@@ -77,8 +78,8 @@ public class EventService {
 
     //UPDATE
     public int updateEvent(UUID eventID, Event event) {
-        String stmt = ("UPDATE event SET title='%s' WHERE event_id='%s'")
-                .formatted(event.getTitle(), eventID);
+        String stmt = ("UPDATE event SET title='%s', description='%s' WHERE event_id='%s'")
+                .formatted(event.getTitle(), event.getDescription(), eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -99,7 +100,7 @@ public class EventService {
 
     //DELETE
     public int[] deleteEvent(UUID eventID) {
-        String stmt1 = "DELETE ALL FROM event_has_day WHERE event_id='%s'".formatted(eventID);
+        String stmt1 = "DELETE FROM event_has_day WHERE event_id='%s'".formatted(eventID);
         String stmt2 = "DELETE FROM event WHERE event_id='%s'".formatted(eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
