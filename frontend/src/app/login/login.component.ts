@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
 import {UserService} from "../user.service";
+import {User} from "../User";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   createAccount(email: string, username: string, password: string) {
-
+    var user: User = {email: email, username: username, password: password, avatar: 0, userID: ""}
+    this.userService.createUser(user).subscribe()
   }
 
   loginToProfile(username: string, password: string) {
