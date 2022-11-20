@@ -285,7 +285,9 @@ public class UserService {
 
     //DELETE
     public int deleteInvitation(UUID inviterID, UUID inviteeID, UUID eventID) {
-        String stmt = ("").formatted(inviterID, inviteeID, eventID);
+        String stmt = ("delete from user_invites_user" +
+                "where inviter_id='%s' and invites_id='%s' and event_id='%s'")
+                .formatted(inviterID, inviteeID, eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
