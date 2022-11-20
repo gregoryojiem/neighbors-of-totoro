@@ -1,12 +1,19 @@
-.navbar {
-  background-color: black;
-  height: 40%;
-  color: whitesmoke;
-  padding-left: 1%;
-  padding-right: 1%;
+.landing{
+  margin: 0;
 }
 
-.navcontent {
+.navbar {
+  background-color: black;
+  height: 5rem;
+  color: whitesmoke;
+  display: flex;
+  padding-left: 1%;
+  padding-right: 1%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
   display: inline-flex;
   align-items: center;
 }
@@ -22,7 +29,6 @@
   background-image: url("../../assets/green-vine-wall.jpg");
   background-repeat: no-repeat;
 }
-
 
 .overlay {
     position: absolute;
@@ -73,7 +79,6 @@
   color: whitesmoke;
   text-align: center;
   display: block;
-  /*display: none;*/
   justify-content: center;
   align-items: center;
 }
