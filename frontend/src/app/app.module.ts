@@ -12,7 +12,8 @@ import { Day } from "./Day";
 import { AvatarComponent } from './avatar/avatar.component';
 import { ModalViewComponent } from './modal-view/modal-view.component';
 import { UserService } from "./user.service";
-import {LandingComponent} from './landing/landing.component';
+import { LandingComponent } from './landing/landing.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {LandingComponent} from './landing/landing.component';
     LoginComponent,
     AvatarComponent,
     ModalViewComponent,
-    LandingComponent
+    LandingComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
