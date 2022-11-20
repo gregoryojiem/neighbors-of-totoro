@@ -5,14 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {UserService} from "./user.service";
+import { UserService } from "./user.service";
+import { LandingComponent } from './landing/landing.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LandingComponent
   ],
   imports: [
+    BrowserModule,
+    NgbModule
     BrowserModule,
     HttpClientModule,
     BrowserModule,
