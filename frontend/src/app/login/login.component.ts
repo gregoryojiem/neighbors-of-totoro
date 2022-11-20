@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-login',
@@ -8,12 +8,12 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
   }
 
-  open(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then()
+  close() {
+    this.activeModal.close()
   }
 }

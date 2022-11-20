@@ -12,7 +12,7 @@ import { Day } from "./Day";
 import { AvatarComponent } from './avatar/avatar.component';
 import { ModalViewComponent } from './modal-view/modal-view.component';
 import { UserService } from "./user.service";
-import { LandingComponent } from './landing/landing.component';
+import {LandingComponent} from './landing/landing.component';
 
 @NgModule({
   declarations: [
