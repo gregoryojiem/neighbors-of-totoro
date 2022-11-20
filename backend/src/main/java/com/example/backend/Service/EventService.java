@@ -79,7 +79,7 @@ public class EventService {
     //UPDATE
     public int updateEvent(UUID eventID, Event event) {
         String stmt = ("UPDATE event SET title='%s', description='%s' WHERE event_id='%s'")
-                .formatted(event.getTitle(), eventID);
+                .formatted(event.getTitle(), event.getDescription(), eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -100,7 +100,7 @@ public class EventService {
 
     //DELETE
     public int[] deleteEvent(UUID eventID) {
-        String stmt1 = "DELETE ALL FROM event_has_day WHERE event_id='%s'".formatted(eventID);
+        String stmt1 = "DELETE FROM event_has_day WHERE event_id='%s'".formatted(eventID);
         String stmt2 = "DELETE FROM event WHERE event_id='%s'".formatted(eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
