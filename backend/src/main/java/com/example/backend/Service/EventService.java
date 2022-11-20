@@ -23,8 +23,8 @@ public class EventService {
 
     //CREATE
     public Object[] createEvent(Event event) {
-        String stmt = ("INSERT INTO event (title) VALUES('%s')")
-                .formatted(event.getTitle());
+        String stmt = ("INSERT INTO event (title, description) VALUES('%s','%s')")
+                .formatted(event.getTitle(), event.getDescription());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement statement = conn.createStatement(
@@ -77,7 +77,7 @@ public class EventService {
 
     //UPDATE
     public int updateEvent(UUID eventID, Event event) {
-        String stmt = ("UPDATE event SET title='%s' WHERE event_id='%s'")
+        String stmt = ("UPDATE event SET title='%s', description='%s' WHERE event_id='%s'")
                 .formatted(event.getTitle(), eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {

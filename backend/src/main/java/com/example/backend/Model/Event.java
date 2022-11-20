@@ -6,6 +6,7 @@ public class Event {
 
     private UUID eventID;
     private String title;
+    private String description;
 
     public Event() {
     }
@@ -24,5 +25,13 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
