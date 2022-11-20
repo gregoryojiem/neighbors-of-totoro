@@ -77,4 +77,8 @@ export class UserService {
     return this.http.request<any>("delete", this.userURL + "/" + userID + "/days/" + dayID,
       {body: JSON.stringify(timeRange), headers: new HttpHeaders({ 'Content-Type': 'application/json' })})
   }
+
+  public verifyPassword(userID: string, hashedPass: string, pass: string): Observable<boolean> {
+    return this.http.get<boolean>("http://localhost:8080/api/verify/" + userID + "/" + hashedPass + "/" + pass)
+  }
 }

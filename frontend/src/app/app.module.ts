@@ -5,16 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DayService } from "./day.service";
-import { Event } from "./Event";
-import { TimeRange } from "./TimeRange";
-import {Day} from "./Day";
-import {User} from "./User";
 import {UserService} from "./user.service";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
