@@ -3,13 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import {EventService} from "./event.service";
+import { EventService } from "./event.service";
 import { Event } from "./Event";
-import {TimeRange} from "./TimeRange";
+import { TimeRange } from "./TimeRange";=
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
