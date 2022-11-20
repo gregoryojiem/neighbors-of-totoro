@@ -42,7 +42,7 @@
   padding-top: 2rem;
   text-align: center;
   background-color: white;
-  height: 30rem;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   column-gap: 2rem;
