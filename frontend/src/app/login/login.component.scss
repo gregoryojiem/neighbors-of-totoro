@@ -15,9 +15,9 @@
   .modal-content {
     background-color: white;
     text-align: center;
-    width: 20rem;
-    height: 12rem;
-    padding: 1.5rem;
+    width: 30rem;
+    height: 20rem;
+    padding: 5rem;
     border-radius: 10px;
     display: grid;
   }
@@ -33,6 +33,7 @@
 }
 
 .submit-button {
+  margin-top: 2rem;
   background-color: #4F6F58;
   border-radius: 30px;
   border-width: 0;
@@ -43,12 +44,15 @@
 }
 
 .navtab {
-  background-color: #313D34;
+  color: #313D34;
   border-radius: 5px;
   border-width: 0;
-  color: white;
-  padding: .75rem;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
+  display: inline-flex;
+  padding-left: 20px;
+  .nav-item {
+    display: block;
+  }
 }
 

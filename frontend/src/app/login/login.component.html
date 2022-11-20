@@ -1,11 +1,14 @@
 <div class="modal-view">
   <div class="modal-body">
     <div class="modal-content">
-      <button class="back-btn" (click)="close()"> Back </button>
+      <div>
+        <button class="back-btn" (click)="close()"> Back </button>
+      </div>
+
 
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li class="navtab" ngbNavItem>
-          <a ngbNavLink>Login</a>
+        <div class="navtab" ngbNavItem>
+          <div ngbNavLink>Login</div>
           <ng-template ngbNavContent>
             <div>
               <form>
@@ -17,14 +20,14 @@
               </form>
             </div>
 
-            <button class="submit-button" type="submit" (click)="loginToProfile()">
+            <button class="submit-button" type="submit">
               Login
             </button>
           </ng-template>
-        </li>
+        </div>
 
-        <li class="navtab" ngbNavItem>
-          <a ngbNavLink>Create Account</a>
+        <div class="navtab" ngbNavItem>
+          <div ngbNavLink>Create Account</div>
           <ng-template ngbNavContent>
             <div>
               <form>
@@ -38,13 +41,12 @@
               <form>
                 <input type="text" placeholder="Enter Password">
               </form>
-
               <button class="submit-button" type="submit" >
                 Create Account
               </button>
             </div>
           </ng-template>
-        </li>
+        </div>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
     </div>
