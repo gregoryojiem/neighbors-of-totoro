@@ -77,6 +77,35 @@ public class UserService {
         return null;
     }
 
+    public User getUserByUsername(String username) {
+        String stmt = "SELECT * FROM \"user\" WHERE username='%s'".formatted(username);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(stmt);
+            User user = new User();
+            while(rs.next()) {
+                user.setUserID(rs.getObject("user_id", UUID.class));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setAvatar(rs.getInt("avatar"));
+            }
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     //UPDATE
     public int updateUser(UUID userID, User user) {
         String stmt = ("UPDATE \"user\" SET email='%s', username='%s', password='%s', avatar=%d WHERE user_id='%s'")
