@@ -33,7 +33,7 @@ public class EventService {
             int rowsAffected = statement.executeUpdate(stmt, Statement.RETURN_GENERATED_KEYS);
             ResultSet keys = statement.getGeneratedKeys();
             keys.next();
-            UUID key = keys.getObject(2, UUID.class);
+            UUID key = keys.getObject(3, UUID.class);
             Object[] results = {rowsAffected, key};
             return results;
         } catch (Exception e) {
@@ -60,6 +60,7 @@ public class EventService {
             Event event = new Event();
             while(rs.next()) {
                 event.setTitle(rs.getString("title"));
+                event.setDescription(rs.getString("description"));
                 event.setEventID(rs.getObject("event_id", UUID.class));
             }
             return event;
