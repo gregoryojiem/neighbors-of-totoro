@@ -4,8 +4,8 @@
       <button class="back-btn" (click)="close()"> Back </button>
 
       <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <button class="navtab" ngbNavItem>
-          <div ngbNavLink>Login</div>
+        <li class="navtab" ngbNavItem>
+          <a ngbNavLink>Login</a>
           <ng-template ngbNavContent>
             <div>
               <form>
@@ -21,10 +21,10 @@
               Login
             </button>
           </ng-template>
-        </button>
+        </li>
 
-        <button class="navtab" ngbNavItem>
-          <div ngbNavLink>Create Account</div>
+        <li class="navtab" ngbNavItem>
+          <a ngbNavLink>Create Account</a>
           <ng-template ngbNavContent>
             <div>
               <form>
@@ -44,7 +44,7 @@
               </button>
             </div>
           </ng-template>
-        </button>
+        </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
     </div>
