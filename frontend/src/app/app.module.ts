@@ -9,10 +9,15 @@ import { DayService } from "./day.service";
 import { Event } from "./Event";
 import { TimeRange } from "./TimeRange";
 import {Day} from "./Day";
+import { AvatarComponent } from './avatar/avatar.component';
+import { ModalViewComponent } from './modal-view/modal-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    AvatarComponent,
+    ModalViewComponent
   ],
   imports: [
     BrowserModule,
