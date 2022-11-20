@@ -28,7 +28,7 @@ public class ApiConfig {
         String password;
 
         try{
-            String path = "neighbors-of-totoro/backend/src/main/java/com/example/backend/Config/dbInfo.ini";
+            String path = "backend/src/main/java/com/example/backend/Config/dbInfo.ini";
             Ini ini = new Ini(new File(path));
             username = ini.get("header", "username");
             password = ini.get("header", "password");
