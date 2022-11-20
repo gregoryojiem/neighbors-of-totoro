@@ -4,16 +4,15 @@ import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
 import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.User;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -387,5 +386,11 @@ public class UserService {
             }
         }
         return -1;
+    }
+    public boolean verifyPassword(UUID userID, String hashedPass, String pass) {
+        Random rand = new Random(userID.getMostSignificantBits() & Long.MAX_VALUE);
+        int randInt = rand.nextInt(1000000000);
+        return Hashing.sha256().hashString(pass+randInt, StandardCharsets.UTF_8).toString()
+                .equals(hashedPass);
     }
 }
