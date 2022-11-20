@@ -1,47 +1,48 @@
-<div class="modal-view">
-  <div class="modal-content">
-    <button class="back-btn"> Back </button>
+<div class="login-modal">
+  <div class="modal-view">
+    <div class="modal-content">
+      <button class="back-btn"> Back </button>
 
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li ngbNavItem>
-        <a ngbNavLink>Login</a>
-        <ng-template ngbNavContent>
-          <div>
-            <form>
-              <input type="text" placeholder="Enter Username">
-            </form>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li ngbNavItem>
+          <a ngbNavLink>Login</a>
+          <ng-template ngbNavContent>
+            <div>
+              <form>
+                <input type="text" placeholder="Enter Username">
+              </form>
 
-            <form>
-              <input type="text" placeholder="Enter Password">
-            </form>
-          </div>
-
-          <button class="submit-button" type="submit" >
-            Login
-          </button>
-        </ng-template>
-      </li>
-
-      <li ngbNavItem>
-        <a ngbNavLink>Create Account</a>
-        <ng-template ngbNavContent>
-          <div>
-            <form>
-              <input type="text" placeholder="Enter Username">
-            </form>
-
-            <form>
-              <input type="text" placeholder="Enter Password">
-            </form>
+              <form>
+                <input type="text" placeholder="Enter Password">
+              </form>
+            </div>
 
             <button class="submit-button" type="submit" >
-              Create Account
+              Login
             </button>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
+          </ng-template>
+        </li>
 
-    <div [ngbNavOutlet]="nav"></div>
+        <li ngbNavItem>
+          <a ngbNavLink>Create Account</a>
+          <ng-template ngbNavContent>
+            <div>
+              <form>
+                <input type="text" placeholder="Enter Username">
+              </form>
+
+              <form>
+                <input type="text" placeholder="Enter Password">
+              </form>
+
+              <button class="submit-button" type="submit" >
+                Create Account
+              </button>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
   </div>
 </div>
