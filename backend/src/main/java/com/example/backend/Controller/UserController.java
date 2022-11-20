@@ -158,4 +158,43 @@ public class UserController {
             return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
         }
     }
+
+    //UserAvailabilityDay RELATIONSHIP
+    //CREATE
+    @CrossOrigin
+    @PostMapping(value = "/users/{userID}/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> createUserAvailabilityDay(@RequestBody TimeRange timeRange,
+                                                             @PathVariable UUID userID, @PathVariable UUID dayID) {
+        int rowsAffected = userService.createUserAvailabilityDay(timeRange, userID, dayID);
+        if(rowsAffected == 1) {
+            return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //GET
+    @CrossOrigin
+    @GetMapping(value = "/users/{userID}/days/{dayID}")
+    public ResponseEntity<List<TimeRange>> getAllAvailabilityRangesForDay(@PathVariable UUID userID, @PathVariable UUID dayID) {
+        List<TimeRange> timeRanges = userService.getAllAvailabilityRangesForDay(userID, dayID);
+        if (timeRanges != null) {
+            return new ResponseEntity<>(timeRanges, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    //DELETE
+    @CrossOrigin
+    @DeleteMapping(value = "/users/{userID}/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> deleteUserAvailabilityDay(@RequestBody TimeRange timeRange,
+                                                             @PathVariable UUID userID, @PathVariable UUID dayID) {
+        int rowsAffected = userService.deleteUserAvailabilityDay(timeRange, userID, dayID);
+        if(rowsAffected == 1) {
+            return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(rowsAffected,HttpStatus.BAD_REQUEST);
+        }
+    }
 }

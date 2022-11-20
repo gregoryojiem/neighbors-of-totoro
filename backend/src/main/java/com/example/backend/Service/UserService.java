@@ -2,6 +2,7 @@ package com.example.backend.Service;
 
 import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
+import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -11,6 +12,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.UUID;
 
 @Service
@@ -295,6 +297,85 @@ public class UserService {
                     ResultSet.CONCUR_UPDATABLE);
             return statement.executeUpdate(stmt);
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //UserAvailabilityDay RELATIONSHIP
+    //CREATE
+    public int createUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        String st = ("INSERT INTO user_availability_day (start_time, end_time, user_id, day_id) VALUES " +
+                "('%tc', '%tc', '%s', '%s')")
+                .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //GET
+    public List<TimeRange> getAllAvailabilityRangesForDay(UUID userID, UUID dayID) {
+        String query = ("SELECT start_time, end_time " +
+                "FROM user_availability_day uad " +
+                "WHERE uad.user_id='%s' and uad.day_id='%s'").formatted(userID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(query);
+            List<TimeRange> timeRanges = new ArrayList<>();
+            while(rs.next()) {
+                TimeRange timeRange = new TimeRange();
+                timeRange.setStartTime(rs.getTimestamp("start_time"));
+                timeRange.setEndTime(rs.getTimestamp("end_time"));
+                timeRanges.add(timeRange);
+            }
+            return timeRanges;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    //DELETE
+    public int deleteUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
+        String st = ("DELETE FROM user_availability_day WHERE " +
+                "start_time='%tc' AND end_time='%tc' AND user_id='%s' AND day_id='%s'")
+                .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
