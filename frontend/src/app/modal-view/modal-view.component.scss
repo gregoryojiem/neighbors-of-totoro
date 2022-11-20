@@ -1,0 +1,21 @@
+.modal-view {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  .modal-content {
+    background-color: white; /* tbd*/
+    width: fit-content;
+    block-size: fit-content;
+    padding: 1.5rem;
+    border-radius: 10px;
+
+  }
+}

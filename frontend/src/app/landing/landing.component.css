@@ -1,187 +1,88 @@
-
-nav{
-position: absolute;
-width: 100%;
-height: 64px;
-left: 0px;
-top: 0px;
-
-background: #000000;
+.navbar {
+  background-color: black;
+  height: 40%;
+  color: whitesmoke;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
-.navText1{
-    position: absolute;
-    height: 51px;
-    left: 829px;
-    top: 7px;
-
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
-    color: #FFFFFF;
-    text-decoration: none;
+.navcontent {
+  display: inline-flex;
+  align-items: center;
 }
 
-.navText2{
-    position: absolute;
-    height: 51px;
-    left: 959px;
-    top: 7px;
-
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
-    color: #FFFFFF;
-    text-decoration: none;
+/* navbar menu */
+.menu {
+  display: flex;
+  gap: 1em;
+  font-size: 20px;
 }
 
-.navText3{
-    position: absolute;
-    height: 51px;
-    left: 1079px;
-    top: 7px;
-
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
-    color: #FFFFFF;
-    text-decoration: none;
+.title-content{
+  background-image: url("../../assets/green-vine-wall.jpg");
+  background-repeat: no-repeat;
 }
 
-.navText4{
-    position: absolute;
-    height: 51px;
-    left: 1200px;
-    top: 7px;
 
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-.vineWall{
-position: absolute;
-width: 100%;
-height: 70%;
-left: 0px;
-top: 64px;
-}
-
-.overlay{
+.overlay {
     position: absolute;
     width: 100%;
     height: 70%;
     left: 0px;
     top: 64px;
-    
     background: rgba(0, 0, 0, 0.59);
 }
 
-.bottomBar{
-    position: absolute;
-    width: 100%;
-    height: 0px;
-    left: 0px;
-    top: 80%;
-
-    border: 10px solid #4F6F58;
-
+.bottomBar {
+  background-color: #4F6F58;
+  height: 2rem;
 }
+
+.whitespace {
+  padding-top: 2rem;
+  text-align: center;
+  background-color: white;
+  height: 30rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 2rem;
+}
+
+.bolded {
+  grid-column: 3 / 4;
+  grid-row: 1;
+  font-size: 25px;
+}
+
+.reg {
+  grid-column: 4 / 5;
+  grid-row: 1;
+}
+
+.vertical {
+  border-left: 2px solid #4F6F58;
+  max-height: inherit;
+  position: absolute;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.divtitleText{
+  position: relative;
+  height: 30rem;
+  color: whitesmoke;
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
 .titleText{
-position: absolute;
-width: 583px;
-height: 45px;
-left: 45%;
-top: 40%;
-
-font-weight: 800;
-font-size: 60px;
-line-height: 58px;
-display: flex;
-align-items: center;
-text-align: center;
-
-font-family: serif;
-color: #FFFFFF;
-
-}
-
-.tagLine{
-    position: absolute;
-    width: 489px;
-    height: 34px;
-    left: 44.5%;
-    top: 48%;
-    
-    font-family: 'Fahkwang';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #FFFFFF;
-    
+  font-size: 50px;
+  border-radius: 10px;
+  padding-top: 10rem;
 }
 
 .introText{
-position: absolute;
-width: 345px;
-height: 238px;
-left: 20%;
-top: 500px;
-
-font-family: 'serif';
-font-style: normal;
-font-weight: 600;
-font-size: 48px;
-line-height: 58px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-}
-
-.captionText{
-position: absolute;
-width: 252px;
-height: 183px;
-left: 55%;
-top: 520px;
-
-font-family: sans-serif;
-font-style: normal;
-font-weight: 600;
-font-size: 15px;
-line-height: 20px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-}
-.introLine{
-position: absolute;
-width: 188px;
-height: 0px;
-left: 43%;
-top: 625px;
-
-border: 1px solid #000000;
-transform: rotate(90deg);
+  font-size: 45px;
 }

@@ -1,22 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
+import { DayService } from "./day.service";
+import { Event } from "./Event";
+import { TimeRange } from "./TimeRange";
+import { Day } from "./Day";
+import { AvatarComponent } from './avatar/avatar.component';
+import { ModalViewComponent } from './modal-view/modal-view.component';
+import { UserService } from "./user.service";
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
-    HomeComponent
+    LoginComponent,
+    AvatarComponent,
+    ModalViewComponent,
+    ModalViewComponent,
+    LandingComponent
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     BrowserModule,
     NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private userService : UserService) {
+  }
+}

@@ -1,0 +1,27 @@
+.modal{
+}
+
+.avatars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  //column-gap: 5%;
+  //row-gap: 20%;
+}
+
+.avatar {
+  background-image: url("Circle.png");
+  background-position: center;
+  background-size : contain;
+  background-repeat: no-repeat;
+  grid-column: auto;
+
+  .pic {
+    display: block;
+    margin: auto;
+  }
+}
+
+
+
+

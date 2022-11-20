@@ -1,0 +1,31 @@
+.login-modal{
+  //display: none;
+}
+.modal-view {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  .modal-content {
+    background-color: white;
+    width: 70rem;
+    height: 40rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+}
+.back-btn {
+  display: block;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: end;
+}
