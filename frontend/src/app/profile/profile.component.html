@@ -14,23 +14,32 @@
   </nav>
 
   <div class="page-content">
-    <h1 class="username">Welcome {{"username"}}</h1>
+    <h1 class="username">Welcome {{username}}</h1>
 
     <div class="event-creation">
       <h3> Create an Event</h3>
       <form>
-        <input class="event-form" placeholder="Event Title">
+        <input class="event-form" placeholder="Event Title" #title>
       </form>
       <form>
-        <input class="event-form" placeholder="Description">
+        <input class="event-form" placeholder="Description" #description>
       </form>
-      <button class="create-event">
+      <button class="create-event" (click)="createEvent(title.value, description.value)">
         Create Event
       </button>
     </div>
 
     <div class="my-events">
       <h3> My Events </h3>
+      <div>
+        <div *ngFor="let event of myEvents">
+          <span>Name: {{event.title}}</span>
+          <br>
+          <span>Description: {{event.description}}</span>
+          <br>
+          <br>
+        </div>
+      </div>
       <div class="event">
         <h3> Invite a Friend </h3>
         <form>

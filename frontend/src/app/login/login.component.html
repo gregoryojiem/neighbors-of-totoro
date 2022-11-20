@@ -12,15 +12,15 @@
           <ng-template ngbNavContent>
             <div>
               <form>
-                <input type="text" placeholder="Enter Username">
+                <input type="text" placeholder="Enter Username" #user>
               </form>
 
               <form>
-                <input type="text" placeholder="Enter Password">
+                <input type="text" placeholder="Enter Password" #pass>
               </form>
             </div>
 
-            <button class="submit-button" type="submit">
+            <button class="submit-button" type="submit" (click)="loginToProfile(user.value, pass.value)">
               Login
             </button>
           </ng-template>
@@ -31,17 +31,17 @@
           <ng-template ngbNavContent>
             <div>
               <form>
-                <input type="text" placeholder="Enter Username">
+                <input type="text" placeholder="Enter Username" #username>
               </form>
 
               <form>
-                <input type="text" placeholder="Enter Email">
+                <input type="text" placeholder="Enter Email" #email>
               </form>
 
               <form>
-                <input type="text" placeholder="Enter Password">
+                <input type="text" placeholder="Enter Password" #password>
               </form>
-              <button class="submit-button" type="submit" >
+              <button class="submit-button" type="submit" (click)="createAccount(email.value, username.value, password.value)">
                 Create Account
               </button>
             </div>

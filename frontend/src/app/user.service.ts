@@ -10,6 +10,7 @@ import {Time} from "@angular/common";
   providedIn: 'root'
 })
 export class UserService {
+  private user : User = {userID: "", username: "", password: "", email: "", avatar: 0}
 
   private userURL = 'http://localhost:8080/api/users';
 
@@ -19,8 +20,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public createUser(user: User): Observable<number> {
-    return this.http.post<number>(this.userURL, JSON.stringify(user), this.httpOptions)
+  public setStoredUser(user: User) {
+    this.user = user
+  }
+
+  public getStoredUser(): User {
+    return this.user
+  }
+
+  public createUser(user: User): Observable<Object[]> {
+    return this.http.post<Object[]>(this.userURL, JSON.stringify(user), this.httpOptions)
   }
 
   public getUser(userID: string): Observable<User> {

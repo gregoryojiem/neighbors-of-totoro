@@ -216,6 +216,7 @@ public class UserService {
                 Event event = new Event();
                 event.setEventID(rs.getObject("event_id", UUID.class));
                 event.setTitle(rs.getString("title"));
+                event.setDescription(rs.getString("description"));
                 events.add(event);
             }
             return events;

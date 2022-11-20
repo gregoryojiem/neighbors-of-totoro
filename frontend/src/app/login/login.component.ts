@@ -22,15 +22,21 @@ export class LoginComponent implements OnInit {
 
   createAccount(email: string, username: string, password: string) {
     var user: User = {email: email, username: username, password: password, avatar: 0, userID: ""}
-    this.userService.createUser(user).subscribe()
+    this.userService.createUser(user).subscribe(info => {
+      this.userService.getUser(info[1] as string).subscribe(newUser => {
+        this.userService.setStoredUser(newUser)
+        this.activeModal.close()
+      })
+    })
   }
 
   loginToProfile(username: string, password: string) {
-    this.userService.getUserByUsername(username).subscribe(info => {
-      this.userService.verifyPassword(info.userID, info.password, password).subscribe(info => {
-        if (info) {
-          this.activeModal.close()
+    this.userService.getUserByUsername(username).subscribe(storedUser => {
+      this.userService.verifyPassword(storedUser.userID, storedUser.password, password).subscribe(correctPass => {
+        if (correctPass) {
+          this.userService.setStoredUser(storedUser)
           this.router.navigate(['/profile'])
+          this.activeModal.close()
         }
       })
     })

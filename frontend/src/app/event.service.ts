@@ -17,8 +17,8 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
-  public createEvent(event: Event): Observable<number> {
-    return this.http.post<number>(this.eventURL, JSON.stringify(event), this.httpOptions)
+  public createEvent(event: Event): Observable<Object[]> {
+    return this.http.post<Object[]>(this.eventURL, JSON.stringify(event), this.httpOptions)
   }
 
   public getEvent(eventID: string): Observable<Event> {
