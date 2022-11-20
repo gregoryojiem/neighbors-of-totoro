@@ -1,6 +1,7 @@
 package com.example.backend.Service;
 
 import com.example.backend.Model.Event;
+import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -201,8 +202,56 @@ public class UserService {
 
     //DELETE
     public int deleteUserParticipatesEvent(UUID userID, UUID eventID) {
-        String st = ("DELETE FROM user_participates_event (user_id, event_id) WHERE (user_id='%s' AND eventID='%s')")
+        String st = ("DELETE FROM user_participates_event (user_id, event_id) WHERE (user_id='%s' AND event_id='%s')")
                 .formatted(userID, eventID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //UserAvailabilityDay RELATIONSHIP
+    //CREATE
+    public int createUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
+        String st = ("INSERT INTO user_availability_day (start_time, end_time, user_id, day_id) VALUES " +
+                "('%tc', '%tc', '%s', '%s')")
+                .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement stmt = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            return stmt.executeUpdate(st);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
+
+    //GET
+
+    //DELETE
+    public int deleteUserAvailabilityDay(UUID userID, UUID dayID) {
+        String st = ("DELETE FROM user_availability_day (user_id, day_id) WHERE (user_id='%s' AND day_id='%s')")
+                .formatted(userID, dayID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement stmt = conn.createStatement(
