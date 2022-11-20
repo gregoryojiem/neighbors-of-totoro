@@ -22,7 +22,7 @@ public class UserService {
 
     //CREATE
     public Object[] createUser(User user) {
-        String stmt = ("INSERT INTO \"user\" (email, username, password) VALUES('%s', '%s', '%s')")
+        String stmt = ("INSERT INTO \"user\" (email, username, password, avatar) VALUES('%s', '%s', '%s', %d)")
                 .formatted(user.getEmail(), user.getUsername(), user.getPassword());
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
@@ -79,7 +79,7 @@ public class UserService {
 
     //UPDATE
     public int updateUser(UUID userID, User user) {
-        String stmt = ("UPDATE \"user\" SET email='%s', username='%s', password='%s' WHERE user_id='%s'")
+        String stmt = ("UPDATE \"user\" SET email='%s', username='%s', password='%s', avatar=%d WHERE user_id='%s'")
                 .formatted(user.getEmail(), user.getUsername(), user.getPassword(), userID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
