@@ -5,13 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { EventService } from "./event.service";
 import { Event } from "./Event";
-import { TimeRange } from "./TimeRange";=
-import { LoginComponent } from './login/login.component';
+import { TimeRange } from "./TimeRange";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
