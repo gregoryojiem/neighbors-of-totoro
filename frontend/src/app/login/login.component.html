@@ -1,33 +1,46 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="mb-3">
-        <label for="dateOfBirth">Date of birth</label>
-        <div class="input-group">
-          <input
-            id="dateOfBirth"
-            class="form-control"
-            placeholder="yyyy-mm-dd"
-            name="dp"
-            ngbDatepicker
-            #dp="ngbDatepicker"
-          />
-          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+<ng-template #content let-modal class="modal">
+  <div>
+    <button> Back </button>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem>
+        <a ngbNavLink>Login</a>
+        <ng-template ngbNavContent>
+          <div>
+            <form>
+              <input type="text" placeholder="Enter Username">
+            </form>
+
+            <form>
+              <input type="text" placeholder="Enter Password">
+            </form>
+          </div>
+
+          <button type="submit" >
+            Login
+          </button>
+        </ng-template>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink>Create Account</a>
+        <ng-template ngbNavContent>
+          <div>
+            <form>
+              <input type="text" placeholder="Enter Username">
+            </form>
+
+            <form>
+              <input type="text" placeholder="Enter Password">
+            </form>
+
+            <button type="submit" >
+              Create Account
+            </button>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-
-<hr />
-
-<pre>{{ closeResult }}</pre>
+<a class="btn btn-lg btn-outline-primary" (click)="open(content)">Account</a>
