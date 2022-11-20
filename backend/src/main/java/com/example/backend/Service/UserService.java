@@ -247,11 +247,41 @@ public class UserService {
     }
 
     //GET
+    public List<TimeRange> getAllAvailabilityRangesForDay(UUID userID, UUID dayID) {
+        String query = ("SELECT start_time, end_time " +
+                "FROM user_availability_day uad " +
+                "WHERE uad.user_id='%s' and uad.day_id='%s'").formatted(userID, dayID);
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try {
+            Statement statement = conn.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = statement.executeQuery(query);
+            List<TimeRange> timeRanges = new ArrayList<>();
+            while(rs.next()) {
+                TimeRange timeRange = new TimeRange();
+                timeRange.setStartTime(rs.getTimestamp("start_time"));
+                timeRange.setEndTime(rs.getTimestamp("end_time"));
+                timeRanges.add(timeRange);
+            }
+            return timeRanges;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     //DELETE
-    public int deleteUserAvailabilityDay(UUID userID, UUID dayID) {
-        String st = ("DELETE FROM user_availability_day (user_id, day_id) WHERE (user_id='%s' AND day_id='%s')")
-                .formatted(userID, dayID);
+    public int deleteUserAvailabilityDay(TimeRange timeRange, UUID userID, UUID dayID) {
+        String st = ("DELETE FROM user_availability_day (start_time, end_time, user_id, day_id) WHERE " +
+                "(start_time='%tc' AND end_time='%tc' AND user_id='%s' AND day_id='%s')")
+                .formatted(timeRange.getStartTime(), timeRange.getEndTime(), userID, dayID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
             Statement stmt = conn.createStatement(
