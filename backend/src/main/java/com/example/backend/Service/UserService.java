@@ -4,16 +4,15 @@ import com.example.backend.Model.Day;
 import com.example.backend.Model.Event;
 import com.example.backend.Model.TimeRange;
 import com.example.backend.Model.User;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -205,7 +204,7 @@ public class UserService {
 
     //DELETE
     public int deleteUserParticipatesEvent(UUID userID, UUID eventID) {
-        String st = ("DELETE FROM user_participates_event (user_id, event_id) WHERE (user_id='%s' AND eventID='%s')")
+        String st = ("DELETE FROM user_participates_event WHERE (user_id='%s' AND event_id='%s')")
                 .formatted(userID, eventID);
         Connection conn = DataSourceUtils.getConnection(dataSource);
         try {
@@ -271,6 +270,7 @@ public class UserService {
                 Event event = new Event();
                 event.setEventID(rs.getObject("event_id", UUID.class));
                 event.setTitle(rs.getString("title"));
+                event.setDescription(rs.getString("description"));
                 events.add(event);
             }
             return events;
@@ -386,5 +386,11 @@ public class UserService {
             }
         }
         return -1;
+    }
+    public boolean verifyPassword(UUID userID, String hashedPass, String pass) {
+        Random rand = new Random(userID.getMostSignificantBits() & Long.MAX_VALUE);
+        int randInt = rand.nextInt(1000000000);
+        return Hashing.sha256().hashString(pass+randInt, StandardCharsets.UTF_8).toString()
+                .equals(hashedPass);
     }
 }

@@ -48,7 +48,7 @@ public class DayController {
     //UPDATE
     @CrossOrigin
     @PutMapping(value = "/days/{dayID}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Integer> updateAlbum(@PathVariable UUID dayID, @RequestBody Day dayDetails) {
+    public ResponseEntity<Integer> updateDay(@PathVariable UUID dayID, @RequestBody Day dayDetails) {
         int rowsAffected = dayService.updateDay(dayID, dayDetails);
         if (rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
@@ -60,7 +60,7 @@ public class DayController {
     //DELETE
     @CrossOrigin
     @DeleteMapping("/days/{dayID}")
-    public ResponseEntity<Integer> deleteAlbum(@PathVariable UUID dayID) {
+    public ResponseEntity<Integer> deleteDay(@PathVariable UUID dayID) {
         int rowsAffected = dayService.deleteDay(dayID);
         if (rowsAffected == 1) {
             return new ResponseEntity<>(rowsAffected, HttpStatus.OK);
