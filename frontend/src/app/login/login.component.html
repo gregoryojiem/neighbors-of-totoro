@@ -1,0 +1,46 @@
+<ng-template #content let-modal class="modal">
+  <div>
+    <button> Back </button>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem>
+        <a ngbNavLink>Login</a>
+        <ng-template ngbNavContent>
+          <div>
+            <form>
+              <input type="text" placeholder="Enter Username">
+            </form>
+
+            <form>
+              <input type="text" placeholder="Enter Password">
+            </form>
+          </div>
+
+          <button type="submit" >
+            Login
+          </button>
+        </ng-template>
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink>Create Account</a>
+        <ng-template ngbNavContent>
+          <div>
+            <form>
+              <input type="text" placeholder="Enter Username">
+            </form>
+
+            <form>
+              <input type="text" placeholder="Enter Password">
+            </form>
+
+            <button type="submit" >
+              Create Account
+            </button>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+</ng-template>
+
+<a class="btn btn-lg btn-outline-primary" (click)="open(content)">Account</a>
